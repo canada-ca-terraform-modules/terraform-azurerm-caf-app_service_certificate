@@ -16,5 +16,5 @@ resource "azurerm_app_service_certificate" "cert" {
   # Supporting this would require an aliased provider for the lookup, which seems to exceed the scope of this module
   #key_vault_id = length(data.azurerm_key_vault_certificate.kv_cert) == 1 ? var.keyVault.id : null
 
-  tags = var.tags
+  tags = merge(var.tags, try(var.appServiceCertificate.tags, {}))
 }
